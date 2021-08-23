@@ -13,6 +13,7 @@ const tasksList = {
 
         for(const taskElement of tasksElements) {
         // dans la boucle, appelle task.bindSingleTaskEvents(taskElement) pour chaque tâche
+            // console.log(taskElement);
             task.bindSingleTaskEvents(taskElement);
 
         }

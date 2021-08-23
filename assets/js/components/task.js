@@ -9,16 +9,15 @@ const task = {
         taskInputElement.addEventListener("keydown", task.handleValidateNewTaskTitleOnKeyDown);
         taskInputElement.addEventListener("blur", task.handleValidateNewTaskTitleOnBlur);
 
-        
-
-
+        const taskValidateElement = taskElement.querySelector('.task__button--validate');
+        taskValidateElement.addEventListener("click", task.handleValidateCompletedTask);
+    
     },
 
   // ---------------------------------------------------------
   // Handlers
   // ---------------------------------------------------------
     handleEnableTaskTitleEditMode: function(evt){
-        console.log("passage en mode édition")
         const taskTitleElement = evt.currentTarget;
         const taskElement = taskTitleElement.closest(".task");
         taskElement.classList.add("task--edit");
@@ -47,4 +46,12 @@ const task = {
         taskElement.classList.remove("task--edit");
 
     },
+
+    handleValidateCompletedTask:function(evt){
+        const taskValidateElement = evt.currentTarget;
+        console.log(taskValidateElement);
+        const taskElement = taskValidateElement.closest(".task");
+        taskElement.classList.remove("task--todo");
+        taskElement.classList.add("task--archive");
+    }
 }
