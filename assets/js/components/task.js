@@ -8,7 +8,9 @@ const task = {
 
         taskInputElement.addEventListener("keydown", task.handleValidateNewTaskTitleOnKeyDown);
         taskInputElement.addEventListener("blur", task.handleValidateNewTaskTitleOnBlur);
+
         
+
 
     },
 
@@ -24,12 +26,25 @@ const task = {
 
     handleValidateNewTaskTitleOnKeyDown: function(evt) {
         if(evt.key === "Enter"){
-            console.log("Champ input validé par enter");
+            task.handleDisableTaskTitleEditMode(evt);
         };
     },
 
     handleValidateNewTaskTitleOnBlur: function(evt) {
-        console.log("champ input validé par perte de focus");
+        task.handleDisableTaskTitleEditMode(evt);
     },
 
+    handleDisableTaskTitleEditMode: function(evt) {
+        // retire la classe ".task--edit"
+        // donne également la valeur du champ input au titre de la tâche
+        const taskInputElement = evt.currentTarget;
+        const taskInputValue = taskInputElement.value;
+        const taskElement = taskInputElement.closest(".task");
+        const taskTitleElement = taskElement.querySelector(".task__title-label");
+        taskTitleElement.textContent = taskInputValue;
+
+        // retirer la classe ".task--edit" de l'élément parent .task
+        taskElement.classList.remove("task--edit");
+
+    },
 }
