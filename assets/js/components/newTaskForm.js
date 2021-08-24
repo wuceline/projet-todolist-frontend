@@ -23,6 +23,9 @@ const newTaskForm = {
         const taskCategory = selectElement.value;
         console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategory);
 
+        const newTaskElement = task.createTaskElement(taskTitle, taskCategory);
+
+        tasksList.insertTaskIntoTasksList(newTaskElement);
 
      }
 

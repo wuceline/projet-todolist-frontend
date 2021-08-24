@@ -14,6 +14,7 @@ const task = {
     
     },
 
+
   // ---------------------------------------------------------
   // Handlers
   // ---------------------------------------------------------
@@ -54,5 +55,34 @@ const task = {
         const taskElement = taskValidateElement.closest(".task");
         taskElement.classList.remove("task--todo");
         taskElement.classList.add("task--complete");
-    }
+    },
+
+
+  // ---------------------------------------------------------
+  // DOM
+  // ---------------------------------------------------------
+
+    createTaskElement: function(taskTitle, taskCategory){
+        const templateElement = document.querySelector('#task-template');
+
+        const templateClonedElement = templateElement.content.cloneNode(true);
+
+        const taskElement = templateClonedElement.querySelector(".task");
+
+        const taskTitleElement = taskElement.querySelector(".task__title-label");
+        taskTitleElement.textContent = taskTitle;
+
+        const taskInputElement = taskElement.querySelector("input");
+        taskInputElement.value = taskTitle;
+
+        taskElement.dataset.category = taskCategory;
+        
+        const taskCategoryElement = taskElement.querySelector(".task__category p");
+        taskCategoryElement.textContent = taskCategory;
+        // console.log(taskElement);
+        return taskElement;
+
+    },
+
+
 }

@@ -5,7 +5,6 @@ const tasksList = {
       tasksList.bindAllTasksEvents();
     },
 
-
     bindAllTasksEvents: function(){
         // recup les taches de la liste
         const tasksElements = document.querySelectorAll(".tasks .task");
@@ -17,9 +16,14 @@ const tasksList = {
             task.bindSingleTaskEvents(taskElement);
 
         }
+    },
 
+    insertTaskIntoTasksList: function(newTaskElement){
+      
+      const tasksListElement = document.querySelector(".tasks");
 
+      tasksListElement.prepend(newTaskElement);
 
-    }
+    },
   
   }

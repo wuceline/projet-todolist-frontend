@@ -315,21 +315,18 @@
       </div>
     </main>
   </div>
-</body>
 
-</html>
+  <template id ="task-template">
 
-<template id ="empty-task">
-
-    <div class="task task--todo" data-category="Ici Catégorie">
+    <div class="task task--todo" data-category="Nom de la catégorie">
         <div class="task__content">
           <div class="task__title">
-            <p class="task__title-label"></p>
-            <input class="task__title-field input" type="text" value="" placeholder="Titre de la tâche"
+            <p class="task__title-label">Titre de la tâche</p>
+            <input class="task__title-field input" type="text" value="Titre de la tâche" placeholder="Titre de la tâche"
               name="title"/>
           </div>
           <div class="task__category">
-            <p></p>
+            <p>Nom de la catégorie</p>
           </div>
           <div class="task__buttons">
             <button class="task__button task__button--incomplete button is-success is-small">
@@ -369,4 +366,9 @@
         </div>
       </div>
 
-</template>
+  </template>
+
+</body>
+
+</html>
+
