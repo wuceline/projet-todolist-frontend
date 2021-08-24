@@ -26,19 +26,18 @@ const categoriesList = {
         })
         .then(function(categories){
 
-        for (category of categories){
-            // console.log(category.name);
+            for (category of categories){
+                // console.log(category.name);
 
-            let listItem = document.createElement("option");
-            listItem.innerHTML= category.name;
-            categoriesList.appendChild(listItem);
+                let listItem = document.createElement("option");
+                listItem.innerHTML= category.name;
+                categoriesList.appendChild(listItem);
 
-            let listItemForm = document.createElement("option");
-            listItemForm.innerHTML = category.name;
-            categoriesListForm.appendChild(listItemForm);
+                let listItemForm = document.createElement("option");
+                listItemForm.innerHTML = category.name;
+                categoriesListForm.appendChild(listItemForm);
 
-
-        }
+            }
         
 
 
