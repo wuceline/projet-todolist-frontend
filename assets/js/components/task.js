@@ -25,11 +25,13 @@ const task = {
 
     handleValidateNewTaskTitleOnKeyDown: function(evt) {
         if(evt.key === "Enter"){
+            console.log("champ input validé par la touche Enter");
             task.handleDisableTaskTitleEditMode(evt);
         };
     },
 
     handleValidateNewTaskTitleOnBlur: function(evt) {
+        console.log("champ input validé par perte de focus");
         task.handleDisableTaskTitleEditMode(evt);
     },
 
@@ -49,9 +51,8 @@ const task = {
 
     handleValidateCompletedTask:function(evt){
         const taskValidateElement = evt.currentTarget;
-        console.log(taskValidateElement);
         const taskElement = taskValidateElement.closest(".task");
         taskElement.classList.remove("task--todo");
-        taskElement.classList.add("task--archive");
+        taskElement.classList.add("task--complete");
     }
 }
