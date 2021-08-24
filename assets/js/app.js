@@ -7,6 +7,8 @@ const app = {
 
         newTaskForm.init();
 
+        categoriesList.init();
+
     }
 
 };
