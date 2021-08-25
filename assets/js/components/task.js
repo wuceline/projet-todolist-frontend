@@ -80,6 +80,9 @@ const task = {
         const taskCategoryElement = taskElement.querySelector(".task__category p");
         taskCategoryElement.textContent = taskCategory;
         // console.log(taskElement);
+
+        task.bindSingleTaskEvents(taskElement);
+        
         return taskElement;
 
     },
