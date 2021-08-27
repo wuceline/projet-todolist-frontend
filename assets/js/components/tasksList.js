@@ -50,7 +50,8 @@ const tasksList = {
       .then(function(tasks){
  
         for(const taskItem of tasks){
-          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id);
+
+          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id, taskItem.status);
           tasksList.insertTaskIntoTasksList(taskElement);
 
         }

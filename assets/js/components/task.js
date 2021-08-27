@@ -58,7 +58,8 @@ const task = {
 
 
         const taskId = taskElement.dataset.id;
-        const data = {completion : 100};
+        const data = {completion : 100,
+                      status: 2};
 
         const httpHeaders = new Headers();
         httpHeaders.append("Content-Type", "application/json");
@@ -95,25 +96,32 @@ const task = {
   // DOM
   // ---------------------------------------------------------
 
-    createTaskElement: function(taskTitle, taskCategory, taskId){
+    createTaskElement: function(taskTitle, taskCategory, taskId, taskStatus){
         const templateElement = document.querySelector('#task-template');
-
         const templateClonedElement = templateElement.content.cloneNode(true);
 
         const taskElement = templateClonedElement.querySelector(".task");
+        console.log(taskElement);
 
+        // TITLE
         const taskTitleElement = taskElement.querySelector(".task__title-label");
         taskTitleElement.textContent = taskTitle;
-
         const taskInputElement = taskElement.querySelector("input");
         taskInputElement.value = taskTitle;
 
-        taskElement.dataset.category = taskCategory;
-        
+        // CATEGORY
+        taskElement.dataset.category = taskCategory;        
         const taskCategoryElement = taskElement.querySelector(".task__category p");
         taskCategoryElement.textContent = taskCategory;
 
-        taskElement.dataset.id = taskId,
+        // ID
+        taskElement.dataset.id = taskId;
+
+        // STATUS
+        if(taskStatus===2){
+            taskElement.classList.remove("task--todo");
+            taskElement.classList.add("task--complete");
+        }
 
         task.bindSingleTaskEvents(taskElement);
         
