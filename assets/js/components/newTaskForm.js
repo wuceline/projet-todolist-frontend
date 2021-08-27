@@ -20,8 +20,14 @@ const newTaskForm = {
         const taskTitle = inputElement.value;
 
         const selectElement = formElement.querySelector(".task__category select");
-        const taskCategory = selectElement.value;
-        console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategory);
+
+        const taskCategoryId = selectElement.value;
+
+        console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategoryId);
+
+
+
+
 
         const newTaskElement = task.createTaskElement(taskTitle, taskCategory);
 

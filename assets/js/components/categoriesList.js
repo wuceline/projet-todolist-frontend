@@ -16,7 +16,7 @@ const categoriesList = {
             cache: 'no-cache'
         };
 
-        fetch(app.apiRootUrl + "/categories",config)
+        fetch(app.apiRootUrl+"/categories",config)
         .then(function(response){
             return response.json();
         })
@@ -24,7 +24,9 @@ const categoriesList = {
 
             // Premier select
             let selectElement = document.createElement("select");
+
             selectElement.classList.add("filters__choice");
+
             
             let firstOptionElement = document.createElement("option");
             firstOptionElement.textContent = "Toutes les catégories";
@@ -32,6 +34,9 @@ const categoriesList = {
 
             for (let category of categories){
                 const optionElement =  document.createElement("option");
+                
+                optionElement.value=category.id;
+
                 optionElement.textContent = category.name;
                 selectElement.append(optionElement);
             };
@@ -48,6 +53,8 @@ const categoriesList = {
 
             for (const category of categories) {
               const optionElement = document.createElement("option");
+              optionElement.value= category.id;
+
               optionElement.textContent = category.name;
               selectElement.append(optionElement);
             }

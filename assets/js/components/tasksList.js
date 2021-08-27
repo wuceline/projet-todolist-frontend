@@ -48,10 +48,11 @@ const tasksList = {
         return response.json();
       })
       .then(function(tasks){
-
+ 
         for(const taskItem of tasks){
-          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name);
+          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id);
           tasksList.insertTaskIntoTasksList(taskElement);
+
         }
 
         // ce que moi j'ai fait

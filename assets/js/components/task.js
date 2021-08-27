@@ -55,6 +55,39 @@ const task = {
         const taskElement = taskValidateElement.closest(".task");
         taskElement.classList.remove("task--todo");
         taskElement.classList.add("task--complete");
+
+
+        const taskId = taskElement.dataset.id;
+        const data = {completion : 100};
+
+        const httpHeaders = new Headers();
+        httpHeaders.append("Content-Type", "application/json");
+
+        let config = {
+            method: 'PATCH',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: httpHeaders,
+            body: JSON.stringify(data),
+        };
+
+        fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
+        .then(function(response){
+            if (response.status == 400) {
+                alert('renseigner une modification');
+                // TODO selon ce qu'on veut faire une fois la réponse récupérée
+            }else if(response.status == 204){
+                alert('modification effectuée');
+            }else if(response.status == 500){
+                alert('Internal Server Error');
+            }
+            else if(response.status == 404){
+                alert('error 404');
+            }
+            
+        })
+        
+
     },
 
 
@@ -62,7 +95,7 @@ const task = {
   // DOM
   // ---------------------------------------------------------
 
-    createTaskElement: function(taskTitle, taskCategory){
+    createTaskElement: function(taskTitle, taskCategory, taskId){
         const templateElement = document.querySelector('#task-template');
 
         const templateClonedElement = templateElement.content.cloneNode(true);
@@ -79,7 +112,8 @@ const task = {
         
         const taskCategoryElement = taskElement.querySelector(".task__category p");
         taskCategoryElement.textContent = taskCategory;
-        // console.log(taskElement);
+
+        taskElement.dataset.id = taskId,
 
         task.bindSingleTaskEvents(taskElement);
         

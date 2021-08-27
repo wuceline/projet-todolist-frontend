@@ -12,7 +12,6 @@ const app = {
         categoriesList.init();
 
     }
-
 };
 
 document.addEventListener("DOMContentLoaded", app.init);
