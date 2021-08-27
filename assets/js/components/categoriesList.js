@@ -16,7 +16,7 @@ const categoriesList = {
             cache: 'no-cache'
         };
 
-        fetch('https://benoclock.github.io/S07-todolist/categories.json',config)
+        fetch(app.apiRootUrl + "/categories",config)
         .then(function(response){
             return response.json();
         })
