@@ -56,18 +56,20 @@ const task = {
                     // TODO selon ce qu'on veut faire une fois la réponse récupérée
                 }else if(response.status == 204){
                     alert('modification effectuée');
-    
-                    
+                    return isInserted == true;
     
                 }else if(response.status == 500){
                     alert('Internal Server Error');
                 }
                 else if(response.status == 404){
                     alert('error 404');
-                }                        
+                }
+
             })
-            
+
+            if(isInserted){
             task.handleDisableTaskTitleEditMode(evt);
+            };
         };
     },
 
@@ -100,8 +102,7 @@ const task = {
                 // TODO selon ce qu'on veut faire une fois la réponse récupérée
             }else if(response.status == 204){
                 alert('modification effectuée');
-
-                
+                return isInserter==true;              
 
             }else if(response.status == 500){
                 alert('Internal Server Error');
@@ -110,7 +111,10 @@ const task = {
                 alert('error 404');
             }                        
         })
-        task.handleDisableTaskTitleEditMode(evt);
+
+        if(isInserted){
+            task.handleDisableTaskTitleEditMode(evt);
+            };
     },
 
     handleDisableTaskTitleEditMode: function(evt) {
