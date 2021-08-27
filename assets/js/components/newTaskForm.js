@@ -26,12 +26,47 @@ const newTaskForm = {
         console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategoryId);
 
 
+        const data = { 
+            category_id : taskCategoryId,
+            title : taskTitle
+        }
 
+        const httpHeaders = new Headers();
+        httpHeaders.append("Content-Type", "application/json");
 
+        let config = {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: httpHeaders,
+            body: JSON.stringify(data),
+        };
 
-        const newTaskElement = task.createTaskElement(taskTitle, taskCategory);
+        fetch(app.apiRootUrl+"/tasks/",  config)
+        .then(function(response){
 
-        tasksList.insertTaskIntoTasksList(newTaskElement);
+            if(response.status==200){
+                alert('La tâche a  bien été créée')
+                return response.json();
+
+                
+            }else if(response.status==400){
+                alert('Il manque des informations');
+            }else if(response.status==500){
+                alert('Internal Servor Error');
+            }
+
+            
+        })
+        .then(function(newTask){
+            console.log(newTask);
+            // const newTaskElement = task.createTaskElement(newTask.title, newTask.category.name);
+            // tasksList.insertTaskIntoTasksList(newTaskElement);
+ 
+            
+        });
+        
+
 
      }
 
