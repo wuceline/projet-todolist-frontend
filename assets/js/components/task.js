@@ -166,10 +166,8 @@ const task = {
             }
             else if(response.status == 404){
                 alert('error 404');
-            }
-            
-        })
-        
+            }            
+        })        
 
     },
 

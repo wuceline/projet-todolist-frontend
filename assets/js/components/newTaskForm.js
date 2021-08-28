@@ -63,7 +63,6 @@ const newTaskForm = {
             
         })
         .then(function(newTask){
-            console.log(taskCategoryName);
 
             const newTaskElement = task.createTaskElement(newTask.title, taskCategoryName, newTask.id );
             tasksList.insertTaskIntoTasksList(newTaskElement);
