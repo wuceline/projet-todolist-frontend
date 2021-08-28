@@ -38,6 +38,7 @@ const categoriesList = {
                 optionElement.value=category.id;
 
                 optionElement.textContent = category.name;
+                
                 selectElement.append(optionElement);
             };
 

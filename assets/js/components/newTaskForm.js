@@ -23,6 +23,9 @@ const newTaskForm = {
 
         const taskCategoryId = selectElement.value;
 
+        // le nom de la catégorie est accessible comme  ceci :
+        const taskCategoryName = selectElement.options[selectElement.selectedIndex].text;
+
         console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategoryId);
 
 
@@ -48,20 +51,22 @@ const newTaskForm = {
             if(response.status==200){
                 alert('La tâche a  bien été créée')
                 return response.json();
-
-                
+               
             }else if(response.status==400){
                 alert('Il manque des informations');
+                window.stop();
             }else if(response.status==500){
                 alert('Internal Servor Error');
+                window.stop();
             }
 
             
         })
         .then(function(newTask){
-            console.log(newTask);
-            // const newTaskElement = task.createTaskElement(newTask.title, newTask.category.name);
-            // tasksList.insertTaskIntoTasksList(newTaskElement);
+            console.log(taskCategoryName);
+
+            const newTaskElement = task.createTaskElement(newTask.title, taskCategoryName, newTask.id );
+            tasksList.insertTaskIntoTasksList(newTaskElement);
  
             
         });
