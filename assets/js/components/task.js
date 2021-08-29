@@ -254,7 +254,7 @@ const task = {
   // DOM
   // ---------------------------------------------------------
 
-    createTaskElement: function(taskTitle, taskCategory, taskId, taskStatus){
+    createTaskElement: function(taskTitle, taskCategory, taskId, taskStatus, taskCompletion){
         const templateElement = document.querySelector('#task-template');
         const templateClonedElement = templateElement.content.cloneNode(true);
 
@@ -274,10 +274,20 @@ const task = {
         // ID
         taskElement.dataset.id = taskId;
 
+        // COMPLETION
+        if(taskCompletion===100){
+            taskElement.classList.remove("task--todo");
+            taskElement.classList.add("task--complete");
+        }else{
+            taskElement.classList.remove("task--complete");
+            taskElement.classList.add("task--todo");
+        }
+
         // STATUS
         if(taskStatus===2){
-        taskElement.classList.remove("task--todo");
-        taskElement.classList.add("task--complete");
+            taskElement.classList.remove("task--todo");
+            taskElement.classList.remove("task--complete")
+            taskElement.classList.add("task--archive");
         }
 
         task.bindSingleTaskEvents(taskElement);

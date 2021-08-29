@@ -51,7 +51,7 @@ const tasksList = {
  
         for(const taskItem of tasks){
 
-          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id, taskItem.status);
+          const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id, taskItem.status, taskItem.completion);
           tasksList.insertTaskIntoTasksList(taskElement);
 
         }
