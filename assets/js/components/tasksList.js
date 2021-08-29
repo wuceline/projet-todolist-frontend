@@ -56,14 +56,15 @@ const tasksList = {
 
         }
 
-        // ce que moi j'ai fait
-        // for (let i=0; i < tasks.length; i++){
-        //   taskTitle = tasks[i].title;
-        //   taskCategory = tasks[i].category.name;
+        /* ce que moi j'ai fait
+        for (let i=0; i < tasks.length; i++){
+          taskTitle = tasks[i].title;
+          taskCategory = tasks[i].category.name;
 
-        //   const newTask = task.createTaskElement(taskTitle, taskCategory);
-        //   tasksList.insertTaskIntoTasksList(newTask);
-        // }
+          const newTask = task.createTaskElement(taskTitle, taskCategory);
+          tasksList.insertTaskIntoTasksList(newTask);
+        }
+        */
       });
 
     },

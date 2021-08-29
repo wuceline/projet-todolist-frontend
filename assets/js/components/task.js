@@ -11,6 +11,9 @@ const task = {
 
         const taskValidateElement = taskElement.querySelector('.task__button--validate');
         taskValidateElement.addEventListener("click", task.handleValidateCompletedTask);
+
+        const taskUncompleteElement = taskElement.querySelector('.task__button--incomplete');
+        taskUncompleteElement.addEventListener("click", task.handleUncompleteElement);
     
     },
 
@@ -171,6 +174,42 @@ const task = {
 
     },
 
+    handleUncompleteElement:function(evt){
+        const taskUncompleteElement = evt.currentTarget;
+        const taskElement = taskUncompleteElement.closest(".task");
+        taskElement.classList.remove("task--complete");
+        taskElement.classList.add("task--todo");
+
+        const taskId = taskElement.dataset.id;
+        const data = {completion : 0,
+                      status: 1};
+
+        const httpHeaders = new Headers();
+        httpHeaders.append("Content-Type", "application/json");
+
+        let config = {
+            method: 'PATCH',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: httpHeaders,
+            body: JSON.stringify(data),
+        };
+
+        fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
+        .then(function(response){
+            if (response.status == 400) {
+                alert('renseigner une modification');
+                // TODO selon ce qu'on veut faire une fois la réponse récupérée
+            }else if(response.status == 204){
+                alert('modification effectuée');
+            }else if(response.status == 500){
+                alert('Internal Server Error');
+            }
+            else if(response.status == 404){
+                alert('error 404');
+            }            
+        })               
+    },
 
   // ---------------------------------------------------------
   // DOM
