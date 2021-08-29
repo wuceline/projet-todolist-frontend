@@ -14,6 +14,9 @@ const task = {
 
         const taskUncompleteElement = taskElement.querySelector('.task__button--incomplete');
         taskUncompleteElement.addEventListener("click", task.handleUncompleteElement);
+
+        const taskArchiveElement =  taskElement.querySelector('.task__button--archive');
+        taskArchiveElement.addEventListener("click", task.handleArchiveElement);
     
     },
 
@@ -144,7 +147,7 @@ const task = {
 
         const taskId = taskElement.dataset.id;
         const data = {completion : 100,
-                      status: 2};
+                      status: 1};
 
         const httpHeaders = new Headers();
         httpHeaders.append("Content-Type", "application/json");
@@ -209,6 +212,42 @@ const task = {
                 alert('error 404');
             }            
         })               
+    },
+
+    handleArchiveElement: function(evt){
+        const taskValidateElement = evt.currentTarget;
+        const taskElement = taskValidateElement.closest(".task");
+        // taskElement.classList.remove("task--todo task--complete");
+        taskElement.classList.remove("task--complete");
+        taskElement.classList.add("task--archive");
+
+        const taskId = taskElement.dataset.id;
+        const data = {status: 2};
+
+        const httpHeaders = new Headers();
+        httpHeaders.append("Content-Type", "application/json");
+
+        let config = {
+            method: 'PATCH',
+            mode: 'cors',
+            cache: 'no-cache',
+            headers: httpHeaders,
+            body: JSON.stringify(data),
+        };
+
+        fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
+        .then(function(response){
+            if (response.status == 400) {
+                alert('renseigner une modification');
+            }else if(response.status == 204){
+                alert('modification effectuée');
+            }else if(response.status == 500){
+                alert('Internal Server Error');
+            }
+            else if(response.status == 404){
+                alert('error 404');
+            }            
+        })    
     },
 
   // ---------------------------------------------------------
