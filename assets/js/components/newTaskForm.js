@@ -25,6 +25,7 @@ const newTaskForm = {
 
         // le nom de la catégorie est accessible comme  ceci :
         const taskCategoryName = selectElement.options[selectElement.selectedIndex].text;
+        // const taskCategoryName = selectElement.querySelector('option:checked').textContent;
 
         console.log("la nouvelle tâche à créer aura les infos suivantes", taskTitle, taskCategoryId);
 
@@ -48,7 +49,7 @@ const newTaskForm = {
         fetch(app.apiRootUrl+"/tasks/",  config)
         .then(function(response){
 
-            if(response.status==200){
+            if(response.status==201){
                 alert('La tâche a  bien été créée')
                 return response.json();
                
@@ -60,6 +61,12 @@ const newTaskForm = {
                 window.stop();
             }
 
+            // correction
+            // if (response.status !== 201) {
+            //     throw 'Erreur avec l\'enregistrement de la tache : ' + response.status ;
+            //   }
+      
+            //   return response.json();
             
         })
         .then(function(newTask){

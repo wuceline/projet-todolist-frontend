@@ -141,17 +141,14 @@ const task = {
     handleValidateCompletedTask:function(evt){
         const taskValidateElement = evt.currentTarget;
         const taskElement = taskValidateElement.closest(".task");
-        taskElement.classList.remove("task--todo");
-        taskElement.classList.add("task--complete");
-
-
+        
+        
         const taskId = taskElement.dataset.id;
-        const data = {completion : 100,
-                      status: 1};
-
+        const data = {completion : 100};
+        
         const httpHeaders = new Headers();
         httpHeaders.append("Content-Type", "application/json");
-
+        
         let config = {
             method: 'PATCH',
             mode: 'cors',
@@ -159,14 +156,16 @@ const task = {
             headers: httpHeaders,
             body: JSON.stringify(data),
         };
-
+        
         fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
         .then(function(response){
             if (response.status == 400) {
                 alert('renseigner une modification');
-                // TODO selon ce qu'on veut faire une fois la réponse récupérée
             }else if(response.status == 204){
                 alert('modification effectuée');
+                task.updateTaskCompletion(taskElement, 100)
+                // taskElement.classList.remove("task--todo");
+                // taskElement.classList.add("task--complete");
             }else if(response.status == 500){
                 alert('Internal Server Error');
             }
@@ -180,31 +179,30 @@ const task = {
     handleUncompleteElement:function(evt){
         const taskUncompleteElement = evt.currentTarget;
         const taskElement = taskUncompleteElement.closest(".task");
-        taskElement.classList.remove("task--complete");
-        taskElement.classList.add("task--todo");
-
+        
         const taskId = taskElement.dataset.id;
-        const data = {completion : 0,
-                      status: 1};
-
-        const httpHeaders = new Headers();
-        httpHeaders.append("Content-Type", "application/json");
-
-        let config = {
-            method: 'PATCH',
-            mode: 'cors',
-            cache: 'no-cache',
-            headers: httpHeaders,
-            body: JSON.stringify(data),
-        };
-
-        fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
-        .then(function(response){
-            if (response.status == 400) {
-                alert('renseigner une modification');
-                // TODO selon ce qu'on veut faire une fois la réponse récupérée
-            }else if(response.status == 204){
-                alert('modification effectuée');
+        const data = {completion : 0};
+            
+            const httpHeaders = new Headers();
+            httpHeaders.append("Content-Type", "application/json");
+            
+            let config = {
+                method: 'PATCH',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: httpHeaders,
+                body: JSON.stringify(data),
+            };
+            
+            fetch(app.apiRootUrl+"/tasks/"+taskId,  config)
+            .then(function(response){
+                if (response.status == 400) {
+                    alert('renseigner une modification');
+                }else if(response.status == 204){
+                    alert('modification effectuée');
+                    task.updateTaskCompletion(taskElement,0)
+                    // taskElement.classList.remove("task--complete");
+                    // taskElement.classList.add("task--todo");
             }else if(response.status == 500){
                 alert('Internal Server Error');
             }
@@ -275,13 +273,15 @@ const task = {
         taskElement.dataset.id = taskId;
 
         // COMPLETION
-        if(taskCompletion===100){
-            taskElement.classList.remove("task--todo");
-            taskElement.classList.add("task--complete");
-        }else{
-            taskElement.classList.remove("task--complete");
-            taskElement.classList.add("task--todo");
-        }
+        task.updateTaskCompletion(taskElement,taskCompletion);
+
+        // if(taskCompletion===100){
+        //     taskElement.classList.remove("task--todo");
+        //     taskElement.classList.add("task--complete");
+        // }else{
+        //     taskElement.classList.remove("task--complete");
+        //     taskElement.classList.add("task--todo");
+        // }
 
         // STATUS
         if(taskStatus===2){
@@ -295,6 +295,20 @@ const task = {
         return taskElement;
 
     },
+
+    updateTaskCompletion: function (taskElement, completion) {
+        if (completion == 100) {
+          // on lui retire la classe task--todo
+          taskElement.classList.remove("task--todo");
+          // on lui ajoute la classe task--complete
+          taskElement.classList.add("task--complete");
+        } else {
+          // on lui retire la classe task--todo
+          taskElement.classList.add("task--todo");
+          // on lui ajoute la classe task--complete
+          taskElement.classList.remove("task--complete");
+        }
+      },
 
 
 }
