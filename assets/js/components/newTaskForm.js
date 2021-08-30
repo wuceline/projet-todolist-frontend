@@ -71,9 +71,11 @@ const newTaskForm = {
         })
         .then(function(newTask){
 
-            const newTaskElement = task.createTaskElement(newTask.title, taskCategoryName, newTask.id );
+            const newTaskElement = task.createTaskElement(newTask.title, taskCategoryName, newTask.id);
             tasksList.insertTaskIntoTasksList(newTaskElement);
- 
+
+            // const categoryNameFromBack= newTask.category.name;
+            // console.log(categoryNameFromBack);
             
         });
         

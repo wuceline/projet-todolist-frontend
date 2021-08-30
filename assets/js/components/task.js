@@ -288,6 +288,8 @@ const task = {
             taskElement.classList.remove("task--todo");
             taskElement.classList.remove("task--complete")
             taskElement.classList.add("task--archive");
+            taskElement.classList.add("is-hidden");
+
         }
 
         task.bindSingleTaskEvents(taskElement);

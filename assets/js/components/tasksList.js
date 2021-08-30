@@ -51,10 +51,9 @@ const tasksList = {
  
         for(const taskItem of tasks){
           // ligne 54, pour cacher les tâches archivées par défaut
-          if (taskItem.status === 1){
             const taskElement = task.createTaskElement(taskItem.title, taskItem.category.name, taskItem.id, taskItem.status, taskItem.completion);
             tasksList.insertTaskIntoTasksList(taskElement);
-          }
+    
 
         }
 
